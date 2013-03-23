@@ -1,0 +1,5 @@
+<Alloy>
+	<TableView id="events" onClick="calendarClick">
+		<SearchBar>
+	</TableView>
+</Alloy>

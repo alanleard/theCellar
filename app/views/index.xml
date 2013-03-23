@@ -1,0 +1,23 @@
+<Alloy>
+	<TabGroup>
+		<Tab title="Events" icon="KS_nav_ui.png">
+			<Window id="win1" class="window">
+				<Require src="header"/>
+				<Require src="events"/>
+			</Window>
+		</Tab>
+		<Tab title="Menu" icon="KS_nav_ui.png">
+			<Window id="win2" class="window">
+				<Require src="header"/>
+				<Require src="menu"/>
+			</Window>
+		</Tab>
+		<Tab title="Options" icon="KS_nav_ui.png">
+			<Window id="win3" class="window">
+				<Require src="header"/>
+				<Require src="options"/>
+			</Window>
+		</Tab>
+		
+	</TabGroup>
+</Alloy>

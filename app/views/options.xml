@@ -1,0 +1,8 @@
+<Alloy>
+	<View class="container">
+		<TextField id="username" class="textField"/>
+		<TextField id="password" class="textField" onReturn="login"/>
+		<Button id="login" onClick="login">Login</Button>
+		<Button id="logout" onClick="logout">Logout</Button>
+	</View>
+</Alloy>

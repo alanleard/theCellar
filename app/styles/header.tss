@@ -1,0 +1,17 @@
+".container": {
+	backgroundColor: Alloy.CFG.colors.background,
+	height:62
+},
+"#logo":{
+    font:Alloy.CFG.fonts.title,
+    top:10,
+    left:10,
+    color:Alloy.CFG.colors.text.main
+},
+"#underline":{
+    height:1,
+    width:'fill',
+    top:60,
+    left:0,
+    backgroundColor:Alloy.CFG.colors.text.main
+}

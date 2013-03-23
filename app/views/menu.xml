@@ -1,0 +1,5 @@
+<Alloy>
+	<TableView id="menu">
+		<SearchBar>
+	</TableView>
+</Alloy>

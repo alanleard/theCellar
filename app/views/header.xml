@@ -1,0 +1,6 @@
+<Alloy>
+	<View class="container">
+		<Label id="logo">theCellar</Label>
+		<View id="underline"/>
+	</View>
+</Alloy>

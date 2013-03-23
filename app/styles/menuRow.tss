@@ -1,0 +1,49 @@
+"#row":{
+    backgroundColor:Alloy.CFG.colors.background,
+    left:10,
+    right:10,
+    height:100
+},
+"#title":{
+    color:Alloy.CFG.colors.text.main,
+    left:10,
+    top:5,
+    width:"59%",
+    font:{fontWeight:"bold", fontSize:"15"},
+    horizontalWrap:false,
+    editable:false,
+},
+"#winery":{
+    color:Alloy.CFG.colors.text.main,
+    right:10,
+    top:5,
+    width:"39%",
+    font:{fontStyle:"italic"},
+    textAlign:"right",
+    editable:false
+},
+".price":{
+    color:Alloy.CFG.colors.text.main,
+    bottom:5,
+    font:{},
+    editable:false
+}
+"#bottle_price":{
+    
+},
+"#glass_price":{
+    left:10
+},
+"#batch_price":{
+    right:10,
+},
+"#description":{
+    color:Alloy.CFG.colors.text.main,
+    top:30,
+    bottom:30,
+    left:10,
+    font:{fontStyle:"italic"},
+    width:"100%",
+    horizontalWrap:true,
+    editable:false
+}

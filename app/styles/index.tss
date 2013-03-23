@@ -1,0 +1,14 @@
+".window": {
+	backgroundColor: Alloy.CFG.colors.background,
+	navBarHidden:"true",
+	layout:"vertical"
+},
+"#win1":{
+    title:"Events"
+},
+"#win2":{
+    title:"Menu"
+},
+"#win3":{
+    title:"Options"
+}

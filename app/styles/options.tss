@@ -1,0 +1,32 @@
+
+".textField":{
+    height:40,
+    width:280,
+    borderColor:Alloy.CFG.colors.black,
+    backgroundColor:Alloy.CFG.colors.white,
+    color:Alloy.CFG.colors.black,
+    paddingLeft:10
+},
+".textField[platform=android]":{
+    height:60
+}
+"#username":{
+    top:10,
+    hintText:"Username"
+},
+"#password":{
+    top:70,
+    hintText:"Password",
+    passwordMask:true
+},
+"#login":{
+    top:140,
+    height:40,
+    width:200
+},
+"#logout":{
+    top:10,
+    height:40,
+    width:200,
+    visible:false
+},

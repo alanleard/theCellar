@@ -1,0 +1,16 @@
+"#row":{
+    backgroundColor:Alloy.CFG.colors.background,
+    height:60
+},
+"#title":{
+    color:Alloy.CFG.colors.text.main,
+    left:10,
+    top:10,
+    font:{fontWeight:"bold"}
+},
+"#event_details":{
+    color:Alloy.CFG.colors.text.main,
+    left:10,
+    bottom:10,
+    font:{fontStyle:"italic"}
+}

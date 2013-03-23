@@ -1,0 +1,10 @@
+<Alloy>
+	<TableViewRow id="row" onSwipe="editMenu">
+		<TextField id="title" onBlur="updateMenu"/>
+		<TextField id="winery"/>
+		<TextField id="bottle_price" class="price"/>
+		<TextField id="glass_price" class="price"/>
+		<TextField id="batch_price" class="price"/>
+		<TextField id="description"/>
+	</TableViewRow>
+</Alloy>
