@@ -1,10 +1,27 @@
 <Alloy>
 	<TableViewRow id="row" onSwipe="editMenu">
-		<TextField id="title" onBlur="updateMenu"/>
-		<TextField id="winery"/>
-		<TextField id="bottle_price" class="price"/>
-		<TextField id="glass_price" class="price"/>
-		<TextField id="batch_price" class="price"/>
-		<TextField id="description"/>
+		<View>
+			<TextField id="title" onReturn="updateMenu"/>
+			<TextField id="winery" onReturn="updateMenu"/>
+			<View id="priceContainer">
+				<View id="glassContainer" class="priceContainer">
+					<Label id="glassLabel" class="priceLabel"/>
+					<TextField id="glass_price" class="price" onReturn="updateMenu"/>
+				</View>
+				<View id="bottleContainer" class="priceContainer">
+					<Label id="bottleLabel" class="priceLabel"/>
+					<TextField id="bottle_price" class="price" onReturn="updateMenu"/>
+				</View>
+				<View id="caseContainer" class="priceContainer">
+					<Label id="caseLabel" class="priceLabel"/>
+					<TextField id="case_price" class="price" onReturn="updateMenu"/>
+				</View>
+			</View>
+			<TextArea id="description" onReturn="updateMenu"/>
+			<View id="adminContainer">
+				<Button id="active" onClick="setActive"/>
+				<TextField id="order" onReturn="setOrder"/>
+			</View>
+		</View>
 	</TableViewRow>
 </Alloy>

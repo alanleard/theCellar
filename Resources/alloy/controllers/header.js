@@ -26,8 +26,17 @@ function Controller() {
         id: "underline"
     });
     $.__views.header.add($.__views.underline);
+    $.__views.refresh = Ti.UI.createButton({
+        right: 10,
+        height: 40,
+        width: 40,
+        id: "refresh"
+    });
+    $.__views.header.add($.__views.refresh);
+    Alloy.Globals.loadWines ? $.__views.refresh.addEventListener("click", Alloy.Globals.loadWines) : __defers["$.__views.refresh!click!Alloy.Globals.loadWines"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
+    __defers["$.__views.refresh!click!Alloy.Globals.loadWines"] && $.__views.refresh.addEventListener("click", Alloy.Globals.loadWines);
     _.extend($, exports);
 }
 

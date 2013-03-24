@@ -22,4 +22,4 @@ function loadWines(){
     }});
 };
 
-
+Alloy.Globals.loadWines = loadWines;

@@ -2,48 +2,112 @@
     backgroundColor:Alloy.CFG.colors.background,
     left:10,
     right:10,
-    height:100
+    height:110,
+    selectedBackgroundColor:Alloy.CFG.colors.background,
+    backgroundSelectedColor:Alloy.CFG.colors.background
 },
 "#title":{
-    color:Alloy.CFG.colors.text.main,
+    color:Alloy.CFG.colors.white,
+    backgroundColor:Alloy.CFG.colors.background,
     left:10,
     top:5,
-    width:"59%",
+    width:"48%",
     font:{fontWeight:"bold", fontSize:"15"},
     horizontalWrap:false,
     editable:false,
+    bubbleParent:false
 },
 "#winery":{
-    color:Alloy.CFG.colors.text.main,
+    color:Alloy.CFG.colors.white,
+    backgroundColor:Alloy.CFG.colors.background,
     right:10,
     top:5,
-    width:"39%",
+    width:"38%",
     font:{fontStyle:"italic"},
     textAlign:"right",
-    editable:false
+    editable:false,
+    paddingRight:5
 },
 ".price":{
-    color:Alloy.CFG.colors.text.main,
-    bottom:5,
+    color:Alloy.CFG.colors.white,
+    backgroundColor:Alloy.CFG.colors.background,
     font:{},
-    editable:false
-}
+    editable:false,
+    right:0,
+    textAlign:"left"
+},
 "#bottle_price":{
-    
 },
 "#glass_price":{
-    left:10
 },
-"#batch_price":{
-    right:10,
+"#case_price":{
 },
 "#description":{
-    color:Alloy.CFG.colors.text.main,
+    color:Alloy.CFG.colors.white,
+    backgroundColor:Alloy.CFG.colors.background,
+    // textAlign:"left",
+    // verticalAlign:Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,
     top:30,
-    bottom:30,
+    height:45,
     left:10,
     font:{fontStyle:"italic"},
-    width:"100%",
-    horizontalWrap:true,
+    right:10,
+    horizontalWrap:false,
     editable:false
+},
+".priceLabel":{
+    left:0,
+    width:Ti.UI.SIZE,
+    font:{fontStyle:"italic"},
+    color:Alloy.CFG.colors.white
+},
+".priceContainer":{
+    layout:"horizontal",
+    width:"33%",
+    bottom:5
+}
+"#priceContainer":{
+    left:10,
+    right:10,
+    top:80,
+    height:20,
+    layout:"horizontal"
+},
+"#bottleLabel":{
+    text:"bottle $"
+},
+"#glassLabel":{
+    text:"glass $"
+},
+"#caseLabel":{
+    text:"case $"
+},
+"#glassContainer":{
+    left:0
+},
+"#bottleContainer":{
+    
+},
+"#caseContainer":{
+    right:0
+},
+"#adminContainer":{
+    top:110,
+    visible:false,
+    height:35
+},
+"#active":{
+    title:"Active",
+    right:10,
+    width:"30%",
+    height:30,
+    bottom:2
+},
+"#order":{
+    hintText:"order",
+    left:10,
+    width:"30%",
+    height:30,
+    bottom:2,
+    backgroundColor:Alloy.CFG.colors.white
 }

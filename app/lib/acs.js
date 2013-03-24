@@ -6,6 +6,7 @@ module.exports = {
             classname: 'wines',
             page: params.page || 1,
             per_page: params.per_page || 10,
+            order:'-order',
             where: params.where || {
                 active: true
             }

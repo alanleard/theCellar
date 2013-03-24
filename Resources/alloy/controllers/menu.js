@@ -37,6 +37,7 @@ function Controller() {
     acs.checkLogin() ? loadWines() : acs.login({
         callback: loadWines
     });
+    Alloy.Globals.loadWines = loadWines;
     _.extend($, exports);
 }
 

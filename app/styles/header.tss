@@ -14,4 +14,9 @@
     top:60,
     left:0,
     backgroundColor:Alloy.CFG.colors.text.main
+},
+"#refresh":{
+    right:10,
+    height:40,
+    width:40
 }
