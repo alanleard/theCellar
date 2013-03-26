@@ -1,26 +1,26 @@
 <Alloy>
 	<TableViewRow id="row" onSwipe="editMenu">
 		<View>
-			<TextField id="title" onReturn="updateMenu"/>
-			<TextField id="winery" onReturn="updateMenu"/>
+			<TextField id="title" onReturn="updateMenu" onBlur="updateMenu"/>
+			<TextField id="winery" onReturn="updateMenu" onBlur="updateMenu"/>
 			<View id="priceContainer">
 				<View id="glassContainer" class="priceContainer">
 					<Label id="glassLabel" class="priceLabel"/>
-					<TextField id="glass_price" class="price" onReturn="updateMenu"/>
+					<TextField id="glass_price" class="price" onReturn="updateMenu" onBlur="updateMenu"/>
 				</View>
 				<View id="bottleContainer" class="priceContainer">
 					<Label id="bottleLabel" class="priceLabel"/>
-					<TextField id="bottle_price" class="price" onReturn="updateMenu"/>
+					<TextField id="bottle_price" class="price" onReturn="updateMenu" onBlur="updateMenu"/>
 				</View>
 				<View id="caseContainer" class="priceContainer">
 					<Label id="caseLabel" class="priceLabel"/>
-					<TextField id="case_price" class="price" onReturn="updateMenu"/>
+					<TextField id="case_price" class="price" onReturn="updateMenu" onBlur="updateMenu"/>
 				</View>
 			</View>
-			<TextArea id="description" onReturn="updateMenu"/>
+			<TextArea id="description" onReturn="updateMenu" onBlur="updateMenu"/>
 			<View id="adminContainer">
 				<Button id="active" onClick="setActive"/>
-				<TextField id="order" onReturn="setOrder"/>
+				<TextField id="order" onReturn="updateMenu" onBlur="updateMenu"/>
 			</View>
 		</View>
 	</TableViewRow>

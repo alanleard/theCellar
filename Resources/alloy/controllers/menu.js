@@ -1,43 +1,60 @@
 function Controller() {
-    function loadWines() {
-        acs.getWines({
-            callback: function(data) {
-                if (data.success) {
-                    var rows = [];
-                    for (var i in data.wines) {
-                        var row = Alloy.createController("menuRow", data.wines[i]).getView();
-                        rows.push(row);
-                    }
-                    $.menu.setData(rows);
-                }
+    function loadWines(params) {
+        if (!params) var params = {};
+        params.callback = populateMenu;
+        acs.getWines(params, populateMenu);
+    }
+    function populateMenu(data) {
+        if (data.success) {
+            var rows = [];
+            for (var i = 0, l = data.wines.length - 1; l >= i; l--) {
+                Ti.API.info("Loading " + data.wines[l].title);
+                var row = Alloy.createController("menuRow", data.wines[l]).getView();
+                rows.push(row);
             }
-        });
+            if (Ti.App.Properties.getString("acs.role") == "staff") {
+                var row = Alloy.createController("menuRow").getView();
+                rows.push(row);
+            }
+            $.menu.setData(rows);
+        }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
-    $.__views.__alloyId11 = Ti.UI.createSearchBar({
-        barColor: Alloy.CFG.colors.black,
-        id: "__alloyId11"
+    $.__views.win2 = Ti.UI.createWindow({
+        backgroundColor: Alloy.CFG.colors.background,
+        navBarHidden: "true",
+        layout: "vertical",
+        id: "win2"
     });
+    $.addTopLevelView($.__views.win2);
+    $.__views.header = Alloy.createController("header", {
+        id: "header"
+    });
+    $.__views.header.setParent($.__views.win2);
     $.__views.menu = Ti.UI.createTableView({
         top: 0,
         backgroundColor: Alloy.CFG.colors.background,
         left: 0,
         right: 0,
-        filterAttribute: "searchable",
-        searchHidden: !0,
-        search: $.__views.__alloyId11,
         id: "menu"
     });
-    $.addTopLevelView($.__views.menu);
+    $.__views.win2.add($.__views.menu);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var acs = require("acs");
     acs.checkLogin() ? loadWines() : acs.login({
         callback: loadWines
     });
-    Alloy.Globals.loadWines = loadWines;
+    $.header.button.show();
+    $.header.button.addEventListener("click", function() {
+        var params = {};
+        Ti.App.Properties.getString("acs.role") == "staff" && (params.where = {
+            archive: !1
+        });
+        loadWines(params);
+    });
     _.extend($, exports);
 }
 

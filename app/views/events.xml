@@ -1,5 +1,8 @@
 <Alloy>
-	<TableView id="events" onClick="calendarClick">
-		<SearchBar>
-	</TableView>
+	<Window id="win1" class="window">
+		<Require src="header" id="header"/>
+		<TableView id="events" onClick="calendarClick">
+			<SearchBar>
+		</TableView>
+	</Window>
 </Alloy>

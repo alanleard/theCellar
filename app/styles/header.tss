@@ -15,8 +15,10 @@
     left:0,
     backgroundColor:Alloy.CFG.colors.text.main
 },
-"#refresh":{
+"#button":{
     right:10,
-    height:40,
-    width:40
+    height:30,
+    width:30,
+    visible:false,
+    backgroundImage:"refresh.png"
 }

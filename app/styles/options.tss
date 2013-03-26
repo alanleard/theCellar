@@ -1,5 +1,10 @@
-
+".window": {
+    backgroundColor: Alloy.CFG.colors.background,
+    navBarHidden:"true",
+    layout:"vertical"
+},
 ".textField":{
+    top:10,
     height:40,
     width:280,
     borderColor:Alloy.CFG.colors.black,
@@ -10,23 +15,31 @@
 ".textField[platform=android]":{
     height:60
 }
+"#loginView":{
+    layout:"vertical"
+},
 "#username":{
-    top:10,
     hintText:"Username"
 },
 "#password":{
-    top:70,
     hintText:"Password",
     passwordMask:true
 },
 "#login":{
-    top:140,
+    top:10,
     height:40,
     width:200
 },
-"#logout":{
-    top:10,
-    height:40,
-    width:200,
+"#notifyView":{
+    layout:"vertical",
     visible:false
+}
+"#message":{
+    hintText:"Broadcast a Message"
 },
+"#badge":{
+    hintText:"App Badge Number?"
+},
+"#send":{
+    top:10
+}

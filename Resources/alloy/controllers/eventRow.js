@@ -5,6 +5,7 @@ function Controller() {
     $.__views.row = Ti.UI.createTableViewRow({
         backgroundColor: Alloy.CFG.colors.background,
         height: 60,
+        className: "event",
         id: "row"
     });
     $.addTopLevelView($.__views.row);

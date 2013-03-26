@@ -26,17 +26,17 @@ function Controller() {
         id: "underline"
     });
     $.__views.header.add($.__views.underline);
-    $.__views.refresh = Ti.UI.createButton({
+    $.__views.button = Ti.UI.createButton({
         right: 10,
-        height: 40,
-        width: 40,
-        id: "refresh"
+        height: 30,
+        width: 30,
+        visible: !1,
+        backgroundImage: "refresh.png",
+        id: "button"
     });
-    $.__views.header.add($.__views.refresh);
-    Alloy.Globals.loadWines ? $.__views.refresh.addEventListener("click", Alloy.Globals.loadWines) : __defers["$.__views.refresh!click!Alloy.Globals.loadWines"] = !0;
+    $.__views.header.add($.__views.button);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    __defers["$.__views.refresh!click!Alloy.Globals.loadWines"] && $.__views.refresh.addEventListener("click", Alloy.Globals.loadWines);
     _.extend($, exports);
 }
 

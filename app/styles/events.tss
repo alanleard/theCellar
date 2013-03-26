@@ -1,10 +1,15 @@
+".window": {
+    backgroundColor: Alloy.CFG.colors.background,
+    navBarHidden:"true",
+    layout:"vertical"
+},
 "#events":{
     top:0,
     backgroundColor:Alloy.CFG.colors.background,
     left:0,
     right:0,
     filterAttribute:"args",
-    //searchHidden:true
+    searchHidden:true
 },
 "SearchBar":{
     barColor:Alloy.CFG.colors.black

@@ -4,11 +4,13 @@
     right:10,
     height:110,
     selectedBackgroundColor:Alloy.CFG.colors.background,
-    backgroundSelectedColor:Alloy.CFG.colors.background
+    backgroundSelectedColor:Alloy.CFG.colors.background,
+    className:"menu"
 },
 "#title":{
+    hintText:"Wine Name",
     color:Alloy.CFG.colors.white,
-    backgroundColor:Alloy.CFG.colors.background,
+    //backgroundColor:Alloy.CFG.colors.background,
     left:10,
     top:5,
     width:"48%",
@@ -18,8 +20,9 @@
     bubbleParent:false
 },
 "#winery":{
+    hintText:"Winery",
     color:Alloy.CFG.colors.white,
-    backgroundColor:Alloy.CFG.colors.background,
+    //backgroundColor:Alloy.CFG.colors.background,
     right:10,
     top:5,
     width:"38%",
@@ -29,8 +32,9 @@
     paddingRight:5
 },
 ".price":{
+    hintText:"Price",
     color:Alloy.CFG.colors.white,
-    backgroundColor:Alloy.CFG.colors.background,
+    // backgroundColor:Alloy.CFG.colors.background,
     font:{},
     editable:false,
     right:0,
@@ -44,7 +48,8 @@
 },
 "#description":{
     color:Alloy.CFG.colors.white,
-    backgroundColor:Alloy.CFG.colors.background,
+    backgroundColor:'transparent',
+    hintText:"Wine Description",
     // textAlign:"left",
     // verticalAlign:Ti.UI.TEXT_VERTICAL_ALIGNMENT_TOP,
     top:30,
@@ -53,7 +58,8 @@
     font:{fontStyle:"italic"},
     right:10,
     horizontalWrap:false,
-    editable:false
+    editable:false,
+    scrollable:false
 },
 ".priceLabel":{
     left:0,

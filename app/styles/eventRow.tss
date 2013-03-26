@@ -1,6 +1,7 @@
 "#row":{
     backgroundColor:Alloy.CFG.colors.background,
-    height:60
+    height:60,
+    className:"event"
 },
 "#title":{
     color:Alloy.CFG.colors.text.main,

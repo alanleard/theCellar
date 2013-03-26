@@ -1,5 +1,9 @@
 loadCalendar();
 
+$.header.button.show();
+
+$.header.button.addEventListener("click", loadCalendar);
+
 function loadCalendar(){
     var moment = require('alloy/moment');
     var today = moment().format();

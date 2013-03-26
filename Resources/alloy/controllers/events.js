@@ -39,6 +39,17 @@ function Controller() {
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
+    $.__views.win1 = Ti.UI.createWindow({
+        backgroundColor: Alloy.CFG.colors.background,
+        navBarHidden: "true",
+        layout: "vertical",
+        id: "win1"
+    });
+    $.addTopLevelView($.__views.win1);
+    $.__views.header = Alloy.createController("header", {
+        id: "header"
+    });
+    $.__views.header.setParent($.__views.win1);
     $.__views.__alloyId0 = Ti.UI.createSearchBar({
         barColor: Alloy.CFG.colors.black,
         id: "__alloyId0"
@@ -49,14 +60,17 @@ function Controller() {
         left: 0,
         right: 0,
         filterAttribute: "args",
+        searchHidden: !0,
         search: $.__views.__alloyId0,
         id: "events"
     });
-    $.addTopLevelView($.__views.events);
+    $.__views.win1.add($.__views.events);
     calendarClick ? $.__views.events.addEventListener("click", calendarClick) : __defers["$.__views.events!click!calendarClick"] = !0;
     exports.destroy = function() {};
     _.extend($, $.__views);
     loadCalendar();
+    $.header.button.show();
+    $.header.button.addEventListener("click", loadCalendar);
     __defers["$.__views.events!click!calendarClick"] && $.__views.events.addEventListener("click", calendarClick);
     _.extend($, exports);
 }

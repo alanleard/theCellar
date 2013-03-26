@@ -10,4 +10,3 @@
 //
 // Alloy.Globals.someGlobalFunction = function(){};
 
-Alloy.Globals.loadWines = function(){}

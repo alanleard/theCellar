@@ -1,11 +1,16 @@
+".window": {
+    backgroundColor: Alloy.CFG.colors.background,
+    navBarHidden:"true",
+    layout:"vertical"
+},
 "#menu":{
     top:0,
     backgroundColor:Alloy.CFG.colors.background,
     left:0,
     right:0,
-    filterAttribute:"searchable",
-    searchHidden:true
+    //filterAttribute:"searchable",
+   // searchHidden:true
 },
-"SearchBar":{
-    barColor:Alloy.CFG.colors.black
-}
+// "SearchBar":{
+    // barColor:Alloy.CFG.colors.black
+// }

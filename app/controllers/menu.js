@@ -6,20 +6,48 @@ if(!acs.checkLogin()){
     loadWines();
 }
 
+function loadWines(params){
+    if(!params){
+         var params = {};
+    }
+    params.callback = populateMenu;
+    acs.getWines(params, populateMenu);
+}
 
-function loadWines(){
-    acs.getWines({callback:function(data){
+function populateMenu(data){
     if(data.success){
+        
         var rows = [];
-        for(var i in data.wines){
-            
-            var row = Alloy.createController('menuRow',data.wines[i]).getView();
+        
+        for(var i = 0, l=data.wines.length-1; l>=i; l--){
+        //for(var i in data.wines){
+            Ti.API.info("Loading "+data.wines[l].title);
+            var row = Alloy.createController('menuRow',data.wines[l]).getView();
             
             rows.push(row);
         }
+        if(Ti.App.Properties.getString("acs.role") == "staff"){
+            var row = Alloy.createController('menuRow').getView();
+            rows.push(row);
+            
+        }
         $.menu.setData(rows);
    }
-    }});
 };
 
-Alloy.Globals.loadWines = loadWines;
+$.header.button.show();
+
+$.header.button.addEventListener("click", function(){
+   // $.menu.deleteSection(0);
+    //setTimeout(function(){
+        var params = {};
+        if(Ti.App.Properties.getString("acs.role") == "staff"){
+            params.where ={
+                archive:false
+            };
+        }
+        
+        loadWines(params);
+   // },5000)
+
+});

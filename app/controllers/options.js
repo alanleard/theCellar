@@ -1,4 +1,10 @@
 var acs = require("acs");
+var logoutBtn = $.header.button
+logoutBtn.backgroundImage = "logout.png";
+
+logoutBtn.addEventListener("click", logout);
+
+
 
 function login(){
     $.password.blur();
@@ -17,12 +23,13 @@ function logout(){
 
 function loginAlert(e){
     if(e.success){
-        $.username.hide();
-        $.password.hide();
-        $.login.hide();
-        $.logout.show();
+        $.loginView.hide();
+        logoutBtn.show();
         acs.pushSubscribe();
-        Ti.App.Properties.setString("acs.role", e.users[0].role);
+        if(Ti.App.Properties.getString("acs.role")=="staff"){
+            $.notifyView.show();
+        }
+        
     } else {
         alert("Please try again.")
     }
@@ -30,12 +37,19 @@ function loginAlert(e){
 
 function logoutAlert(e){
     if(e.success){
-        $.logout.hide();
-        $.username.show();
-        $.password.show();
-        $.login.show();
+        logoutBtn.hide();
+        $.notifyView.hide();
+        $.loginView.show();
         Ti.App.Properties.setString("acs.role", null);
     } else {
         alert("Please try again.")
     }
 };
+
+function sendBroadcast(evt){
+    acs.sendBroadcast({
+        message:$.message.value,
+        badge:$.badge.value,
+        payload:null
+    })
+}

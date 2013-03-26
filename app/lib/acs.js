@@ -1,29 +1,51 @@
 var Cloud = require("ti.cloud");
 Ti.App.Properties.setString("acs.loggedIn", false);
 module.exports = {
-    getWines: function(params){
+    getWines: function(params, callback){
+        if(!params){
+            var params = {};
+        }
+        Ti.API.info("Getting Wines...")
+        
         Cloud.Objects.query({
             classname: 'wines',
             page: params.page || 1,
             per_page: params.per_page || 10,
             order:'-order',
-            where: params.where || {
-                active: true
+            where: params.where?params.where:{
+                active: true,
+                archive:false
             }
         }, function (e) {
-            params.callback(e);
-            //Ti.API.info("ACS getWines: "+JSON.stringify(e));
+           // if(params.callback){
+                if(callback){callback(e);}
+            //    }
+            Ti.API.info("ACS getWines: "+JSON.stringify(e));
         }); 
     },
     updateWine: function(params){
-        Cloud.Objects.update({
-            classname: 'wines',
-            id:params.id,
-            fields:params.fields
-        }, function (e) {
-            params.callback(e);
-            //Ti.API.info("ACS getWines: "+JSON.stringify(e));
-        }); 
+        if(params){
+            Cloud.Objects.update({
+                classname: 'wines',
+                id:params.id,
+                fields:params.fields
+            }, function (e) {
+                params.callback(e);
+                //Ti.API.info("ACS getWines: "+JSON.stringify(e));
+            }); 
+         }
+    },
+    createWine: function(params){
+        if(params){
+            params.fields.archive=false;
+            Cloud.Objects.create({
+                classname: 'wines',
+                fields:params.fields
+            }, function (e) {
+                params.callback(e.wines[0]);
+                //Ti.API.info("ACS getWines: "+JSON.stringify(e));
+            });
+        }
     },
     checkLogin: function(){
         if(!Ti.App.Properties.hasProperty("acs.uuid")){
@@ -33,6 +55,9 @@ module.exports = {
         }
     },
     createUser: function(params){
+        if(!params){
+            var params = {};
+        }
         Ti.App.Properties.setString("acs.uuid", Ti.Platform.createUUID());
         Ti.App.Properties.setString("acs.password",Ti.App.Properties.getString("acs.uuid").substring(0, 20));
         Cloud.Users.create({
@@ -42,7 +67,7 @@ module.exports = {
         }, function (e) {
             if (e.success) {
                 // var user = e.users[0];
-                params.callback();
+                if(params.callback){params.callback(e);}
                 Ti.App.Properties.setString("acs.loggedIn", true);
             } else {
                 alert('Error:\\n' +
@@ -51,13 +76,16 @@ module.exports = {
         });
     },
     login: function(params){
+        if(!params){
+            var params = {};
+        }
         var username = Ti.App.Properties.getString("acs.uuid");
         var password = Ti.App.Properties.getString("acs.password");
-        if(params && params.username){
+        if(params.username){
             username = params.username;
         }
         
-        if(params && params.password){
+        if(params.password){
             password = params.password;
         }
         
@@ -67,36 +95,60 @@ module.exports = {
         }, function (e) {
             if(e.success){
                 Ti.App.Properties.setString("acs.loggedIn", true);
+                Ti.App.Properties.setString("acs.role", e.users[0].role);
                 Ti.API.info("ACS Login: "+JSON.stringify(e));
             }
-            params.callback(e);
+            if(params.callback){params.callback(e);}
             
         });
         
     },
     logout: function(params){
+        if(!params){
+            var params = {};
+        }
         
         Cloud.Users.logout(
             function (e) {
-                params.callback(e);
+                if(params.callback){params.callback(e);}
                 Ti.App.Properties.setString("acs.loggedIn", false);
                 Ti.API.info("ACS Logout: "+JSON.stringify(e))
             }
         );
         
     },
+    sendBroadcast: function(params){
+        if(params){
+            Cloud.PushNotifications.notify({
+                channel: 'main',
+                payload: {alert:params.message,badge:params.badge || 0,payload:params.payload||null}
+                
+            }, function (e) {
+                if (e.success) {
+                    alert('Broadcast Sent!');
+                    x
+                } else {
+                    alert('Error:\\n' +
+                        ((e.error && e.message) || JSON.stringify(e)));
+                }
+            });
+        }
+    },
     pushSubscribe: function (params){
+        if(!params){
+            var params = {};
+        }
         if(Ti.Platform.name == "iPhone OS"){
             var os = "ios";
         } else {
             var os = Ti.Platform.name;
         }
         Cloud.PushNotifications.subscribe({
-            channel: params?params.channel:"main",
+            channel: "main",
             device_token: Ti.App.Properties.getString("acs.device_token"),
             type: os
         }, function (e) {
-            params.callback(e);
+            if(params.callback){params.callback(e);}
             Ti.API.info("ACS Subscribe: "+JSON.stringify(e))
         });
 
@@ -112,7 +164,7 @@ module.exports = {
             success:function(e)
             {
                 Ti.App.Properties.setString("acs.device_token",e.deviceToken);
-                params.callback(e.deviceToken);
+                callback(e.deviceToken);
             },
             error:function(e)
             {

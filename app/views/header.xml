@@ -2,6 +2,6 @@
 	<View class="container">
 		<Label id="logo">theCellar</Label>
 		<View id="underline"/>
-		<Button id="refresh" onClick="Alloy.Globals.loadWines"/>
+		<Button id="button" />
 	</View>
 </Alloy>
