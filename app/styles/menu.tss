@@ -10,7 +10,7 @@
     right:0,
     //filterAttribute:"searchable",
    // searchHidden:true
-},
+}
 // "SearchBar":{
     // barColor:Alloy.CFG.colors.black
 // }

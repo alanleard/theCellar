@@ -1,6 +1,6 @@
 <Alloy>
 	<TableViewRow id="row" onSwipe="editMenu">
-		<View>
+		<View id="container">
 			<TextField id="title" onReturn="updateMenu" onBlur="updateMenu"/>
 			<TextField id="winery" onReturn="updateMenu" onBlur="updateMenu"/>
 			<View id="priceContainer">

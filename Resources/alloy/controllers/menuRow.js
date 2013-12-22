@@ -5,7 +5,8 @@ function Controller() {
             var properties = {
                 editable: !0,
                 backgroundColor: Alloy.CFG.colors.white,
-                color: Alloy.CFG.colors.black
+                color: Alloy.CFG.colors.black,
+                borderWidth: 1
             };
             $.title.applyProperties(properties);
             $.description.applyProperties(properties);
@@ -22,7 +23,8 @@ function Controller() {
             var properties = {
                 editable: !1,
                 backgroundColor: null,
-                color: Alloy.CFG.colors.white
+                color: Alloy.CFG.colors.white,
+                borderWidth: 0
             };
             $.title.applyProperties(properties);
             $.description.applyProperties(properties);
@@ -60,13 +62,13 @@ function Controller() {
         }
     }
     function setActive() {
-        if ($.active.title == "Active") {
-            $.active.title = "In-Active";
-            $.active.status = !1;
+        if ($.active.title == "Set Active") {
+            $.active.title = "Set In-Active";
+            $.active.status = !0;
             updateMenu();
         } else {
-            $.active.title = "Active";
-            $.active.status = !0;
+            $.active.title = "Set Active";
+            $.active.status = !1;
             updateMenu();
         }
     }
@@ -85,13 +87,13 @@ function Controller() {
     });
     $.addTopLevelView($.__views.row);
     editMenu ? $.__views.row.addEventListener("swipe", editMenu) : __defers["$.__views.row!swipe!editMenu"] = !0;
-    $.__views.__alloyId8 = Ti.UI.createView({
-        id: "__alloyId8"
+    $.__views.__alloyId10 = Ti.UI.createView({
+        id: "__alloyId10"
     });
-    $.__views.row.add($.__views.__alloyId8);
+    $.__views.row.add($.__views.__alloyId10);
     $.__views.title = Ti.UI.createTextField({
         hintText: "Wine Name",
-        color: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.text.main,
         left: 10,
         top: 5,
         width: "48%",
@@ -102,14 +104,18 @@ function Controller() {
         horizontalWrap: !1,
         editable: !1,
         bubbleParent: !1,
+        borderColor: Alloy.CFG.colors.black,
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+        borderWidth: 0,
+        paddingLeft: 2,
         id: "title"
     });
-    $.__views.__alloyId8.add($.__views.title);
+    $.__views.__alloyId10.add($.__views.title);
     updateMenu ? $.__views.title.addEventListener("return", updateMenu) : __defers["$.__views.title!return!updateMenu"] = !0;
     updateMenu ? $.__views.title.addEventListener("blur", updateMenu) : __defers["$.__views.title!blur!updateMenu"] = !0;
     $.__views.winery = Ti.UI.createTextField({
         hintText: "Winery",
-        color: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.text.main,
         right: 10,
         top: 5,
         width: "38%",
@@ -119,9 +125,13 @@ function Controller() {
         textAlign: "right",
         editable: !1,
         paddingRight: 5,
+        borderColor: Alloy.CFG.colors.black,
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+        borderWidth: 0,
+        paddingLeft: 2,
         id: "winery"
     });
-    $.__views.__alloyId8.add($.__views.winery);
+    $.__views.__alloyId10.add($.__views.winery);
     updateMenu ? $.__views.winery.addEventListener("return", updateMenu) : __defers["$.__views.winery!return!updateMenu"] = !0;
     updateMenu ? $.__views.winery.addEventListener("blur", updateMenu) : __defers["$.__views.winery!blur!updateMenu"] = !0;
     $.__views.priceContainer = Ti.UI.createView({
@@ -132,7 +142,7 @@ function Controller() {
         layout: "horizontal",
         id: "priceContainer"
     });
-    $.__views.__alloyId8.add($.__views.priceContainer);
+    $.__views.__alloyId10.add($.__views.priceContainer);
     $.__views.glassContainer = Ti.UI.createView({
         layout: "horizontal",
         width: "33%",
@@ -147,18 +157,22 @@ function Controller() {
         font: {
             fontStyle: "italic"
         },
-        color: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.text.main,
         text: "glass $",
         id: "glassLabel"
     });
     $.__views.glassContainer.add($.__views.glassLabel);
     $.__views.glass_price = Ti.UI.createTextField({
-        hintText: "Price",
-        color: Alloy.CFG.colors.white,
+        hintText: "Price  ",
+        color: Alloy.CFG.colors.text.main,
         font: {},
         editable: !1,
         right: 0,
         textAlign: "left",
+        borderColor: Alloy.CFG.colors.black,
+        keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
+        borderWidth: 0,
+        paddingLeft: 2,
         id: "glass_price"
     });
     $.__views.glassContainer.add($.__views.glass_price);
@@ -177,18 +191,22 @@ function Controller() {
         font: {
             fontStyle: "italic"
         },
-        color: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.text.main,
         text: "bottle $",
         id: "bottleLabel"
     });
     $.__views.bottleContainer.add($.__views.bottleLabel);
     $.__views.bottle_price = Ti.UI.createTextField({
-        hintText: "Price",
-        color: Alloy.CFG.colors.white,
+        hintText: "Price  ",
+        color: Alloy.CFG.colors.text.main,
         font: {},
         editable: !1,
         right: 0,
         textAlign: "left",
+        borderColor: Alloy.CFG.colors.black,
+        keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
+        borderWidth: 0,
+        paddingLeft: 2,
         id: "bottle_price"
     });
     $.__views.bottleContainer.add($.__views.bottle_price);
@@ -208,25 +226,29 @@ function Controller() {
         font: {
             fontStyle: "italic"
         },
-        color: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.text.main,
         text: "case $",
         id: "caseLabel"
     });
     $.__views.caseContainer.add($.__views.caseLabel);
     $.__views.case_price = Ti.UI.createTextField({
-        hintText: "Price",
-        color: Alloy.CFG.colors.white,
+        hintText: "Price  ",
+        color: Alloy.CFG.colors.text.main,
         font: {},
         editable: !1,
         right: 0,
         textAlign: "left",
+        borderColor: Alloy.CFG.colors.black,
+        keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
+        borderWidth: 0,
+        paddingLeft: 2,
         id: "case_price"
     });
     $.__views.caseContainer.add($.__views.case_price);
     updateMenu ? $.__views.case_price.addEventListener("return", updateMenu) : __defers["$.__views.case_price!return!updateMenu"] = !0;
     updateMenu ? $.__views.case_price.addEventListener("blur", updateMenu) : __defers["$.__views.case_price!blur!updateMenu"] = !0;
     $.__views.description = Ti.UI.createTextArea({
-        color: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.text.main,
         backgroundColor: "transparent",
         hintText: "Wine Description",
         top: 30,
@@ -239,9 +261,13 @@ function Controller() {
         horizontalWrap: !1,
         editable: !1,
         scrollable: !1,
+        borderColor: Alloy.CFG.colors.black,
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES,
+        borderWidth: 0,
+        paddingLeft: 2,
         id: "description"
     });
-    $.__views.__alloyId8.add($.__views.description);
+    $.__views.__alloyId10.add($.__views.description);
     updateMenu ? $.__views.description.addEventListener("return", updateMenu) : __defers["$.__views.description!return!updateMenu"] = !0;
     updateMenu ? $.__views.description.addEventListener("blur", updateMenu) : __defers["$.__views.description!blur!updateMenu"] = !0;
     $.__views.adminContainer = Ti.UI.createView({
@@ -250,12 +276,12 @@ function Controller() {
         height: 35,
         id: "adminContainer"
     });
-    $.__views.__alloyId8.add($.__views.adminContainer);
+    $.__views.__alloyId10.add($.__views.adminContainer);
     $.__views.active = Ti.UI.createButton({
-        title: "Active",
+        title: "Set Active",
         right: 10,
-        width: "30%",
-        height: 30,
+        width: "35%",
+        height: 25,
         bottom: 2,
         id: "active"
     });
@@ -267,7 +293,8 @@ function Controller() {
         width: "30%",
         height: 30,
         bottom: 2,
-        backgroundColor: Alloy.CFG.colors.white,
+        backgroundColor: Alloy.CFG.colors.text.main,
+        borderColor: Alloy.CFG.colors.black,
         id: "order"
     });
     $.__views.adminContainer.add($.__views.order);
@@ -286,17 +313,18 @@ function Controller() {
     $.order.value = args ? args.order : "";
     if (args && !args.active) {
         $.active.status = !1;
-        $.active.title = "In-Active";
+        $.active.title = "Set Active";
         $.row.backgroundColor = Alloy.CFG.colors.black;
+    } else if (args && args.active) if (args.active == 0) {
+        $.active.status = !1;
+        $.active.title = "Set Active";
+        $.row.backgroundColor = Alloy.CFG.colors.black;
+    } else {
+        $.active.status = !0;
+        $.active.title = "Set In-Active";
     }
     args || Ti.App.Properties.getString("acs.role") == "staff" && editMenu({
         direction: "left"
-    });
-    $.description.addEventListener("focus", function(evt) {
-        evt.value == "Wine Description" && (evt.value = "");
-    });
-    $.description.addEventListener("blur", function(evt) {
-        evt.value == "" && (evt.value = "Wine Description");
     });
     __defers["$.__views.row!swipe!editMenu"] && $.__views.row.addEventListener("swipe", editMenu);
     __defers["$.__views.title!return!updateMenu"] && $.__views.title.addEventListener("return", updateMenu);

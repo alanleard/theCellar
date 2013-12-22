@@ -89,17 +89,22 @@ module.exports = {
             payload: {
                 alert: params.message,
                 badge: params.badge || 0,
-                payload: params.payload || null
+                sound: "default",
+                content: params.content || null,
+                type: params.type || "text"
             }
         }, function(e) {
-            e.success ? alert("Success") : alert("Error:\\n" + (e.error && e.message || JSON.stringify(e)));
+            if (e.success) {
+                alert("Broadcast Sent!");
+                x;
+            } else alert("Error:\\n" + (e.error && e.message || JSON.stringify(e)));
         });
     },
     pushSubscribe: function(params) {
         if (!params) var params = {};
         var os = "ios";
         Cloud.PushNotifications.subscribe({
-            channel: "main",
+            channel: "test",
             device_token: Ti.App.Properties.getString("acs.device_token"),
             type: os
         }, function(e) {
@@ -107,18 +112,21 @@ module.exports = {
             Ti.API.info("ACS Subscribe: " + JSON.stringify(e));
         });
     },
-    getDeviceToken: function(callback) {
+    getDeviceToken: function(params) {
         Ti.API.info("REGISTERING LOCAL PUSH");
         Titanium.Network.registerForPushNotifications({
             types: [ Titanium.Network.NOTIFICATION_TYPE_BADGE, Titanium.Network.NOTIFICATION_TYPE_ALERT, Titanium.Network.NOTIFICATION_TYPE_SOUND ],
             success: function(e) {
-                Ti.App.Properties.setString("acs.device_token", e.deviceToken);
-                callback(e.deviceToken);
+                if ("resume" != params.type && e && e.deviceToken) {
+                    Ti.App.Properties.setString("acs.device_token", e.deviceToken);
+                    params._callback && params._callback(e.deviceToken);
+                }
             },
             error: function(e) {
                 alert("Error during registration: " + e.error);
             },
             callback: function(e) {
+                e.data.payload && Ti.App.Properties.setString("acs.pushPayload", e.data.payload);
                 var alertDialog = Ti.UI.createAlertDialog({
                     title: "Cellar Notification",
                     message: e.data.alert

@@ -2,11 +2,14 @@ var acs = require("acs");
 var logoutBtn = $.header.button
 logoutBtn.backgroundImage = "logout.png";
 
+if(Ti.App.Properties.getString("username")){
+    $.username.value = Ti.App.Properties.getString("username");
+}
+
 logoutBtn.addEventListener("click", logout);
 
-
-
 function login(){
+    Ti.App.Properties.setString("username", $.username.value);
     $.password.blur();
     $.username.blur();
     if(!acs.checkLogin()){
@@ -31,7 +34,7 @@ function loginAlert(e){
         }
         
     } else {
-        alert("Please try again.")
+        alert("Please try again.");
     }
 };
 
@@ -47,9 +50,25 @@ function logoutAlert(e){
 };
 
 function sendBroadcast(evt){
-    acs.sendBroadcast({
-        message:$.message.value,
-        badge:$.badge.value,
-        payload:null
-    })
+    var confirmDialog = Ti.UI.createAlertDialog({
+        title:"Send Broadcast?",
+        message:"Are you sure you are ready to send this broadcast?",
+        buttonNames:["Send", "Cancel"],
+        cancel:1
+    });
+    
+    confirmDialog.show();
+    
+    confirmDialog.addEventListener("click", function(evt){
+        if(evt.index == 0){
+             acs.sendBroadcast({
+                message:$.message.value,
+                badge:$.badge.value,
+                type:$.type.value || 'text',
+                content:$.content.value || ""
+            });
+        }
+    });
+   
+    
 }

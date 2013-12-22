@@ -19,11 +19,13 @@
     layout:"vertical"
 },
 "#username":{
-    hintText:"Username"
+    hintText:"Username",
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
 },
 "#password":{
     hintText:"Password",
-    passwordMask:true
+    passwordMask:true,
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_NONE
 },
 "#login":{
     top:10,
@@ -35,10 +37,20 @@
     visible:false
 }
 "#message":{
-    hintText:"Broadcast a Message"
+    hintText:"Broadcast a Message",
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES
+},
+"#content":{
+    hintText:"Message Content",
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES
+},
+"#type":{
+    hintText:"Message Type ('url','text','map')",
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES
 },
 "#badge":{
-    hintText:"App Badge Number?"
+    hintText:"App Badge Number?",
+     keyboardType:Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION
 },
 "#send":{
     top:10

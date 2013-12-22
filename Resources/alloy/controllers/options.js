@@ -34,10 +34,20 @@ function Controller() {
         } else alert("Please try again.");
     }
     function sendBroadcast(evt) {
-        acs.sendBroadcast({
-            message: $.message.value,
-            badge: $.badge.value,
-            payload: null
+        var confirmDialog = Ti.UI.createAlertDialog({
+            title: "Send Broadcast?",
+            message: "Are you sure you are ready to send this broadcast?",
+            buttonNames: [ "Send", "Cancel" ],
+            cancel: 1
+        });
+        confirmDialog.show();
+        confirmDialog.addEventListener("click", function(evt) {
+            evt.index == 0 && acs.sendBroadcast({
+                message: $.message.value,
+                badge: $.badge.value,
+                type: $.type.value || "text",
+                content: $.content.value || ""
+            });
         });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -54,15 +64,15 @@ function Controller() {
         id: "header"
     });
     $.__views.header.setParent($.__views.win3);
-    $.__views.__alloyId9 = Ti.UI.createView({
-        id: "__alloyId9"
+    $.__views.__alloyId11 = Ti.UI.createView({
+        id: "__alloyId11"
     });
-    $.__views.win3.add($.__views.__alloyId9);
+    $.__views.win3.add($.__views.__alloyId11);
     $.__views.loginView = Ti.UI.createView({
         layout: "vertical",
         id: "loginView"
     });
-    $.__views.__alloyId9.add($.__views.loginView);
+    $.__views.__alloyId11.add($.__views.loginView);
     $.__views.username = Ti.UI.createTextField({
         top: 10,
         height: 40,
@@ -72,6 +82,7 @@ function Controller() {
         color: Alloy.CFG.colors.black,
         paddingLeft: 10,
         hintText: "Username",
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
         id: "username"
     });
     $.__views.loginView.add($.__views.username);
@@ -85,6 +96,7 @@ function Controller() {
         paddingLeft: 10,
         hintText: "Password",
         passwordMask: !0,
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
         id: "password"
     });
     $.__views.loginView.add($.__views.password);
@@ -103,7 +115,7 @@ function Controller() {
         visible: !1,
         id: "notifyView"
     });
-    $.__views.__alloyId9.add($.__views.notifyView);
+    $.__views.__alloyId11.add($.__views.notifyView);
     $.__views.message = Ti.UI.createTextField({
         top: 10,
         height: 40,
@@ -113,9 +125,36 @@ function Controller() {
         color: Alloy.CFG.colors.black,
         paddingLeft: 10,
         hintText: "Broadcast a Message",
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES,
         id: "message"
     });
     $.__views.notifyView.add($.__views.message);
+    $.__views.content = Ti.UI.createTextField({
+        top: 10,
+        height: 40,
+        width: 280,
+        borderColor: Alloy.CFG.colors.black,
+        backgroundColor: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.black,
+        paddingLeft: 10,
+        hintText: "Message Content",
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES,
+        id: "content"
+    });
+    $.__views.notifyView.add($.__views.content);
+    $.__views.type = Ti.UI.createTextField({
+        top: 10,
+        height: 40,
+        width: 280,
+        borderColor: Alloy.CFG.colors.black,
+        backgroundColor: Alloy.CFG.colors.white,
+        color: Alloy.CFG.colors.black,
+        paddingLeft: 10,
+        hintText: "Message Type ('url','text','map')",
+        autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES,
+        id: "type"
+    });
+    $.__views.notifyView.add($.__views.type);
     $.__views.badge = Ti.UI.createTextField({
         top: 10,
         height: 40,
@@ -125,6 +164,7 @@ function Controller() {
         color: Alloy.CFG.colors.black,
         paddingLeft: 10,
         hintText: "App Badge Number?",
+        keyboardType: Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
         id: "badge"
     });
     $.__views.notifyView.add($.__views.badge);

@@ -9,6 +9,8 @@
 			</View>
 			<View id="notifyView">
 				<TextField id="message" class="textField"/>
+				<TextField id="content" class="textField"/>
+				<TextField id="type" class="textField"/>
 				<TextField id="badge" class="textField"/>
 				<Button id="send" onClick="sendBroadcast">Send Broadcast</Button>
 			</View>

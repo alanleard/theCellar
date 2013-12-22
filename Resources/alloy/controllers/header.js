@@ -3,7 +3,7 @@ function Controller() {
     $model = arguments[0] ? arguments[0].$model : null;
     var $ = this, exports = {}, __defers = {};
     $.__views.header = Ti.UI.createView({
-        backgroundColor: Alloy.CFG.colors.background,
+        backgroundColor: Alloy.CFG.backgroundColor,
         height: 62,
         id: "header"
     });

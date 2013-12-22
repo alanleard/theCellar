@@ -1,0 +1,1 @@
+module.exports = [{"isApi":true,"priority":1000.0001,"key":"TextField","style":{paddingLeft:5,}},{"isClass":true,"priority":10000.0024,"key":"window","style":{backgroundColor:Alloy.CFG.colors.background,navBarHidden:"true",layout:"vertical",}},{"isId":true,"priority":100000.0025,"key":"menu","style":{top:0,backgroundColor:Alloy.CFG.colors.background,left:0,right:0,}}];

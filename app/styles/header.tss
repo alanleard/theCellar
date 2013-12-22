@@ -1,5 +1,5 @@
 ".container": {
-	backgroundColor: Alloy.CFG.colors.background,
+	backgroundColor: Alloy.CFG.backgroundColor,
 	height:62
 },
 "#logo":{

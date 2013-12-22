@@ -5,7 +5,7 @@ module.exports = {
         if(!params){
             var params = {};
         }
-        Ti.API.info("Getting Wines...")
+        Ti.API.info("Getting Wines...");
         
         Cloud.Objects.query({
             classname: 'wines',
@@ -30,8 +30,9 @@ module.exports = {
                 id:params.id,
                 fields:params.fields
             }, function (e) {
-                params.callback(e);
-                //Ti.API.info("ACS getWines: "+JSON.stringify(e));
+                Ti.API.info("ACS getWines: "+JSON.stringify(e));
+                params.callback && params.callback(e);
+                
             }); 
          }
     },
@@ -42,14 +43,14 @@ module.exports = {
                 classname: 'wines',
                 fields:params.fields
             }, function (e) {
-                params.callback(e.wines[0]);
+                params.callback && params.callback(e.wines[0]);
                 //Ti.API.info("ACS getWines: "+JSON.stringify(e));
             });
         }
     },
     checkLogin: function(){
         if(!Ti.App.Properties.hasProperty("acs.uuid")){
-            return "never"
+            return "never";
         } else {
             return Ti.App.Properties.getString("acs.loggedIn");
         }
@@ -67,7 +68,7 @@ module.exports = {
         }, function (e) {
             if (e.success) {
                 // var user = e.users[0];
-                if(params.callback){params.callback(e);}
+                params.callback && params.callback(e);
                 Ti.App.Properties.setString("acs.loggedIn", true);
             } else {
                 alert('Error:\\n' +
@@ -98,7 +99,7 @@ module.exports = {
                 Ti.App.Properties.setString("acs.role", e.users[0].role);
                 Ti.API.info("ACS Login: "+JSON.stringify(e));
             }
-            if(params.callback){params.callback(e);}
+            params.callback && params.callback(e);
             
         });
         
@@ -110,9 +111,10 @@ module.exports = {
         
         Cloud.Users.logout(
             function (e) {
-                if(params.callback){params.callback(e);}
+                params.callback && params.callback(e);
                 Ti.App.Properties.setString("acs.loggedIn", false);
-                Ti.API.info("ACS Logout: "+JSON.stringify(e))
+                Ti.App.Properties.setString("acs.role", null);
+                Ti.API.info("ACS Logout: "+JSON.stringify(e));
             }
         );
         
@@ -121,12 +123,17 @@ module.exports = {
         if(params){
             Cloud.PushNotifications.notify({
                 channel: 'main',
-                payload: {alert:params.message,badge:params.badge || 0,payload:params.payload||null}
+                payload: {
+                    alert:params.message,
+                    badge:params.badge || 0,
+                    sound: "default",
+                    content:params.content ||null,
+                    type:params.type || "text"}
                 
             }, function (e) {
                 if (e.success) {
                     alert('Broadcast Sent!');
-                    x
+                    
                 } else {
                     alert('Error:\\n' +
                         ((e.error && e.message) || JSON.stringify(e)));
@@ -135,25 +142,27 @@ module.exports = {
         }
     },
     pushSubscribe: function (params){
-        if(!params){
-            var params = {};
+        if(Ti.App.Properties.getString("acs.loggedIn")){
+            if(!params){
+                var params = {};
+            }
+            if(Ti.Platform.name == "iPhone OS"){
+                var os = "ios";
+            } else {
+                var os = Ti.Platform.name;
+            }
+            Cloud.PushNotifications.subscribe({
+                channel: "test",
+                device_token: Ti.App.Properties.getString("acs.device_token"),
+                type: os
+            }, function (e) {
+                params.callback && params.callback(e);
+                Ti.API.info("ACS Subscribe: "+JSON.stringify(e));
+            });
         }
-        if(Ti.Platform.name == "iPhone OS"){
-            var os = "ios";
-        } else {
-            var os = Ti.Platform.name;
-        }
-        Cloud.PushNotifications.subscribe({
-            channel: "main",
-            device_token: Ti.App.Properties.getString("acs.device_token"),
-            type: os
-        }, function (e) {
-            if(params.callback){params.callback(e);}
-            Ti.API.info("ACS Subscribe: "+JSON.stringify(e))
-        });
-
     },
-    getDeviceToken: function(callback){
+    getDeviceToken: function(params){
+        
         Ti.API.info("REGISTERING LOCAL PUSH");
         Titanium.Network.registerForPushNotifications({
             types: [
@@ -163,8 +172,13 @@ module.exports = {
             ],
             success:function(e)
             {
-                Ti.App.Properties.setString("acs.device_token",e.deviceToken);
-                callback(e.deviceToken);
+               if(params.type != 'resume'){
+                   if(e && e.deviceToken){
+                        Ti.App.Properties.setString("acs.device_token",e.deviceToken);
+                        if(params._callback){params._callback(e.deviceToken);}
+                    }
+                }
+                
             },
             error:function(e)
             {
@@ -174,12 +188,16 @@ module.exports = {
             {
             // called when a push notification is received.
                 //alert("Received a push notification\n\nPayload:\n\n"+JSON.stringify(e.data));
+                if(e.data.payload){
+                    Ti.App.Properties.setString("acs.pushPayload", e.data.payload);
+                }
                 var alertDialog = Ti.UI.createAlertDialog({
                     title:"Cellar Notification",
                     message:e.data.alert
                 });
                 alertDialog.show();   
+
             }});
     
     }
-}
+};

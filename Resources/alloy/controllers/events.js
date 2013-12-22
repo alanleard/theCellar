@@ -50,9 +50,9 @@ function Controller() {
         id: "header"
     });
     $.__views.header.setParent($.__views.win1);
-    $.__views.__alloyId0 = Ti.UI.createSearchBar({
+    $.__views.__alloyId2 = Ti.UI.createSearchBar({
         barColor: Alloy.CFG.colors.black,
-        id: "__alloyId0"
+        id: "__alloyId2"
     });
     $.__views.events = Ti.UI.createTableView({
         top: 0,
@@ -61,7 +61,7 @@ function Controller() {
         right: 0,
         filterAttribute: "args",
         searchHidden: !0,
-        search: $.__views.__alloyId0,
+        search: $.__views.__alloyId2,
         id: "events"
     });
     $.__views.win1.add($.__views.events);

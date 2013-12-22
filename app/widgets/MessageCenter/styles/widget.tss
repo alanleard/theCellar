@@ -1,0 +1,11 @@
+"#navgroup":{
+    barColor:Alloy.CFG.backgroundColor
+},
+"#window": {
+	modal: true,
+	backgroundColor: "#fff",
+	navBarHidden: true
+},
+"TableView": {
+	editable: true
+}

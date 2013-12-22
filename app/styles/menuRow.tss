@@ -1,3 +1,6 @@
+"#container":{
+	
+},
 "#row":{
     backgroundColor:Alloy.CFG.colors.background,
     left:10,
@@ -9,7 +12,7 @@
 },
 "#title":{
     hintText:"Wine Name",
-    color:Alloy.CFG.colors.white,
+    color:Alloy.CFG.colors.text.main,
     //backgroundColor:Alloy.CFG.colors.background,
     left:10,
     top:5,
@@ -17,11 +20,15 @@
     font:{fontWeight:"bold", fontSize:"15"},
     horizontalWrap:false,
     editable:false,
-    bubbleParent:false
+    bubbleParent:false,
+    borderColor:Alloy.CFG.colors.black,
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+    borderWidth:0,
+    paddingLeft:2
 },
 "#winery":{
     hintText:"Winery",
-    color:Alloy.CFG.colors.white,
+    color:Alloy.CFG.colors.text.main,
     //backgroundColor:Alloy.CFG.colors.background,
     right:10,
     top:5,
@@ -29,16 +36,24 @@
     font:{fontStyle:"italic"},
     textAlign:"right",
     editable:false,
-    paddingRight:5
+    paddingRight:5,
+    borderColor:Alloy.CFG.colors.black,
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_WORDS,
+    borderWidth:0,
+     paddingLeft:2
 },
 ".price":{
-    hintText:"Price",
-    color:Alloy.CFG.colors.white,
+    hintText:"Price  ",
+    color:Alloy.CFG.colors.text.main,
     // backgroundColor:Alloy.CFG.colors.background,
     font:{},
     editable:false,
     right:0,
-    textAlign:"left"
+    textAlign:"left",
+    borderColor:Alloy.CFG.colors.black,
+    keyboardType:Ti.UI.KEYBOARD_NUMBERS_PUNCTUATION,
+    borderWidth:0,
+    paddingLeft:2
 },
 "#bottle_price":{
 },
@@ -47,7 +62,7 @@
 "#case_price":{
 },
 "#description":{
-    color:Alloy.CFG.colors.white,
+    color:Alloy.CFG.colors.text.main,
     backgroundColor:'transparent',
     hintText:"Wine Description",
     // textAlign:"left",
@@ -59,13 +74,17 @@
     right:10,
     horizontalWrap:false,
     editable:false,
-    scrollable:false
+    scrollable:false,
+    borderColor:Alloy.CFG.colors.black,
+    autocapitalization:Ti.UI.TEXT_AUTOCAPITALIZATION_SENTENCES,
+    borderWidth:0,
+    paddingLeft:2
 },
 ".priceLabel":{
     left:0,
     width:Ti.UI.SIZE,
     font:{fontStyle:"italic"},
-    color:Alloy.CFG.colors.white
+    color:Alloy.CFG.colors.text.main
 },
 ".priceContainer":{
     layout:"horizontal",
@@ -103,10 +122,10 @@
     height:35
 },
 "#active":{
-    title:"Active",
+    title:"Set Active",
     right:10,
-    width:"30%",
-    height:30,
+    width:"35%",
+    height:25,
     bottom:2
 },
 "#order":{
@@ -115,5 +134,6 @@
     width:"30%",
     height:30,
     bottom:2,
-    backgroundColor:Alloy.CFG.colors.white
+    backgroundColor:Alloy.CFG.colors.text.main,
+    borderColor:Alloy.CFG.colors.black
 }
